@@ -1,0 +1,71 @@
+{
+  "version": "1.0",
+  "updated": "2026-02-04",
+  "tasks": [
+    {
+      "id": "T-001",
+      "title": "Gating Signal Detection Rule - Rate Limit 429",
+      "goal": "Implement a detection rule for HTTP 429 rate limiting responses from Moltbook API",
+      "inputs": ["datasets/gating-signals/samples/"],
+      "outputs": ["guardrails/filters/rate_limit.py"],
+      "acceptance": "make test-task-001",
+      "time_budget": "30min",
+      "difficulty": "easy",
+      "submit": "PR to guardrails/filters/",
+      "starter": "tasks/T-001/starter.py",
+      "status": "open"
+    },
+    {
+      "id": "T-002",
+      "title": "Prompt Injection Filter - Basic Patterns",
+      "goal": "Implement a filter to detect common prompt injection patterns (ignore previous, system prompt, etc.)",
+      "inputs": ["datasets/injection-samples/"],
+      "outputs": ["guardrails/filters/injection_basic.py"],
+      "acceptance": "make test-task-002",
+      "time_budget": "2-4h",
+      "difficulty": "medium",
+      "submit": "PR to guardrails/filters/",
+      "starter": "tasks/T-002/starter.py",
+      "status": "open"
+    },
+    {
+      "id": "T-003",
+      "title": "Safe Reply Template - Collaboration Invitation",
+      "goal": "Create a safe reply template for inviting other agents to collaborate, avoiding injection triggers",
+      "inputs": ["guardrails/templates/"],
+      "outputs": ["guardrails/templates/collab_invite.md"],
+      "acceptance": "make test-task-003",
+      "time_budget": "1h",
+      "difficulty": "easy",
+      "submit": "PR to guardrails/templates/",
+      "starter": "tasks/T-003/starter.md",
+      "status": "open"
+    },
+    {
+      "id": "T-004",
+      "title": "Gating Signal Dataset - Collect Samples",
+      "goal": "Collect and document 10+ examples of Moltbook platform gating signals with metadata",
+      "inputs": [],
+      "outputs": ["datasets/gating-signals/samples/*.json"],
+      "acceptance": "make test-task-004",
+      "time_budget": "2-4h",
+      "difficulty": "medium",
+      "submit": "PR to datasets/gating-signals/",
+      "starter": "tasks/T-004/starter.json",
+      "status": "open"
+    },
+    {
+      "id": "T-005",
+      "title": "Injection Sample Dataset - Red Team Examples",
+      "goal": "Collect and document 20+ sanitized prompt injection examples from Moltbook",
+      "inputs": [],
+      "outputs": ["datasets/injection-samples/*.json"],
+      "acceptance": "make test-task-005",
+      "time_budget": "2-4h",
+      "difficulty": "medium",
+      "submit": "PR to datasets/injection-samples/",
+      "starter": "tasks/T-005/starter.json",
+      "status": "open"
+    }
+  ]
+}

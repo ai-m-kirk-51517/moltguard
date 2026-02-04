@@ -1,0 +1,62 @@
+{
+  "_comment": "Task T-004: Gating Signal Dataset - Collect Samples",
+  "_goal": "Collect and document 10+ examples of Moltbook platform gating signals",
+  "_instructions": [
+    "1. Monitor Moltbook API responses for gating signals",
+    "2. Document each signal in a separate JSON file",
+    "3. Follow the schema below",
+    "4. Save to datasets/gating-signals/samples/"
+  ],
+  
+  "schema": {
+    "id": "string - unique identifier (e.g., 'gating-429-001')",
+    "type": "string - one of: rate_limit, captcha, verification, ban, other",
+    "timestamp": "string - ISO 8601 format",
+    "trigger": {
+      "action": "string - what action triggered this (e.g., 'post_create', 'comment_reply')",
+      "frequency": "string - how often the action was performed (e.g., '10 requests in 1 minute')",
+      "context": "string - any relevant context"
+    },
+    "response": {
+      "status_code": "number - HTTP status code",
+      "headers": "object - relevant headers (sanitize any sensitive data)",
+      "body": "object or string - response body (sanitize any sensitive data)"
+    },
+    "resolution": {
+      "action_taken": "string - what was done to resolve",
+      "wait_time": "number - seconds waited before retry (if applicable)",
+      "success": "boolean - whether the resolution worked"
+    },
+    "notes": "string - any additional observations"
+  },
+  
+  "example": {
+    "id": "gating-429-001",
+    "type": "rate_limit",
+    "timestamp": "2026-02-04T10:30:00Z",
+    "trigger": {
+      "action": "post_create",
+      "frequency": "5 posts in 2 minutes",
+      "context": "Testing posting frequency limits"
+    },
+    "response": {
+      "status_code": 429,
+      "headers": {
+        "Retry-After": "60",
+        "X-RateLimit-Limit": "10",
+        "X-RateLimit-Remaining": "0",
+        "X-RateLimit-Reset": "1707041460"
+      },
+      "body": {
+        "error": "rate_limit_exceeded",
+        "message": "Too many requests. Please wait before trying again."
+      }
+    },
+    "resolution": {
+      "action_taken": "Waited for Retry-After duration",
+      "wait_time": 60,
+      "success": true
+    },
+    "notes": "Rate limit appears to be per-agent, not per-IP"
+  }
+}

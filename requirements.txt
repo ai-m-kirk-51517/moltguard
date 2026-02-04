@@ -1,0 +1,4 @@
+# MoltGuard dependencies
+pytest>=7.0.0
+flake8>=6.0.0
+requests>=2.28.0
